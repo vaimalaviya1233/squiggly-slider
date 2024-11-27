@@ -11,6 +11,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,7 +27,6 @@ import org.junit.Test
 class SquigglySliderTest {
   @get:Rule val paparazzi = Paparazzi(
     deviceConfig = DeviceConfig.PIXEL_5,
-    showSystemUi = false,
     renderingMode = RenderingMode.SHRINK,
   )
 
@@ -50,7 +50,7 @@ class SquigglySliderTest {
           squigglesSpec = SquigglySlider.SquigglesSpec(
             amplitude = 0.dp
           ),
-          squigglesAnimator = SquigglySlider.SquigglesAnimator(animationProgress = mutableStateOf(0.5f)),
+          squigglesAnimator = SquigglySlider.SquigglesAnimator(animationProgress = stateOf(0.5f)),
         )
       }
     }
@@ -66,7 +66,7 @@ class SquigglySliderTest {
             amplitude = 2.dp,
             wavelength = 24.dp,
           ),
-          squigglesAnimator = SquigglySlider.SquigglesAnimator(animationProgress = mutableStateOf(0.5f)),
+          squigglesAnimator = SquigglySlider.SquigglesAnimator(animationProgress = stateOf(0.5f)),
         )
       }
     }
@@ -79,7 +79,7 @@ class SquigglySliderTest {
           value = 0.6f,
           onValueChange = {},
           squigglesSpec = SquigglySlider.SquigglesSpec(strokeWidth = 30.dp),
-          squigglesAnimator = SquigglySlider.SquigglesAnimator(animationProgress = mutableStateOf(1f)),
+          squigglesAnimator = SquigglySlider.SquigglesAnimator(animationProgress = stateOf(1f)),
         )
       }
     }
@@ -92,7 +92,7 @@ class SquigglySliderTest {
           value = 0.6f,
           onValueChange = {},
           squigglesSpec = SquigglySlider.SquigglesSpec(strokeWidth = 1.dp),
-          squigglesAnimator = SquigglySlider.SquigglesAnimator(animationProgress = mutableStateOf(1f)),
+          squigglesAnimator = SquigglySlider.SquigglesAnimator(animationProgress = stateOf(1f)),
         )
       }
     }
@@ -114,3 +114,8 @@ class SquigglySliderTest {
     }
   }
 }
+
+private fun <T> stateOf(value: T): State<T> {
+  return mutableStateOf(value)
+}
+
